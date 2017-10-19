@@ -1,16 +1,19 @@
 package springdemo.mvc;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/student")
-public class StudentController {
+@RequestMapping("/customer")
+public class CustomerController {
 	
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
@@ -22,20 +25,23 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/showForm")
-	public String showForm(Model model) {
+	public String showForm(Model theModel) {
 		
-		Student student = new Student();
-		
-		model.addAttribute("student", student);
-		
-		model.addAttribute("itemOptions", student.getItemOptions());
-		
-		return "student-form";
+		theModel.addAttribute("customer", new Customer());
+		return "customer-form";
 	}
 	
-	@RequestMapping("/processStudent")
-	public String processStudent(@ModelAttribute("student") Student theStudent) {
-		
-		return "student-confirmation";
+	@RequestMapping("/processForm")
+	public String processForm(
+			@Valid @ModelAttribute("customer") Customer theCustomer, 
+			BindingResult theBindingResult
+			) {
+		if (theBindingResult.hasErrors()) {
+			return "customer-form";
+		} else {	
+			theCustomer.setFirstName(theCustomer.getFirstName().toUpperCase());
+			return "customer-confirmation";
+		}
 	}
+	
 }

@@ -18,12 +18,30 @@
 		</form:select>
 		<br>
 		
-		City: 
-		<form:select path="city">
-			<form:options items="${student.city}" />
-		</form:select>
+<!-- 		City:  -->
+<%-- 		<form:select path="city"> --%>
+<%-- 			<form:options items="${student.city}" /> --%>
+<%-- 		</form:select> --%>
+<!-- 		<br> -->
+		
+<!-- 		Item:  -->
+<%-- 		<form:select path="itemOptions"> --%>
+<%-- 			<form:options items="${itemOptions}" /> --%>
+<%-- 		</form:select> --%>
+<!-- 		<br><br> -->
+		City:
+        <form:radiobuttons path="city" items="${student.city}"  />
+        <br>
+		Favorite Language:
 		<br>
-				
+		<form:radiobutton path="favoriteLanguage" value="Java"/> Java 	
+		<form:radiobutton path="favoriteLanguage" value="C#"/> C# 		
+		<form:radiobutton path="favoriteLanguage" value="Python"/> Python 		
+		
+		<br>
+		<form:checkbox path="operSystem" value="Win"/> Win
+		<form:checkbox path="operSystem" value="Mac"/> Mac
+		<form:checkbox path="operSystem" value="Dos"/> Dos	
 		<input type="submit" value="Submit">
 		
 	</form:form>
