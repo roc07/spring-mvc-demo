@@ -8,7 +8,10 @@
 <body>
 	
 The Customer is confirmed: ${customer.firstName} ${customer.lastName}
-
+Number of free passes: ${customer.passes} <br>
+zip: ${customer.postalCode}
+<br>
+course code: ${customer.courseCode}
 </body>
 </html>
 
